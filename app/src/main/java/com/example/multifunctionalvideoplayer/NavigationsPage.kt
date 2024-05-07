@@ -13,12 +13,15 @@ fun NavigationArgsSample(link: String) {
     NavHost(
         navController = navController,
         startDestination = "screen1"
-    ) {
+    )
+    {
+
         composable("screen1") {
             Screen1(link, onNavigateToScreen2 = {
                 navController.navigate("screen2")
             })
         }
+
         composable("screen2") {
             Screen2(link)
         }
