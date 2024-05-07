@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.multifunctionalvideoplayer.ui.theme.MultiFunctionalVideoPlayerTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,52 +36,52 @@ class MainActivity : ComponentActivity() {
         setContent {
             MultiFunctionalVideoPlayerTheme {
                 VideoFinderFromLink()
+                
+
             }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MultiFunctionalVideoPlayerTheme {
-        VideoFinderFromLink()
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        MultiFunctionalVideoPlayerTheme {
+        }
     }
-}
 
-@Composable
-fun VideoFinderFromLink(
-) {
-    var text by remember { mutableStateOf("") }
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    @Composable
+    fun VideoFinderFromLink(
     ) {
-        Row (
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        )
-        {
+        var text by remember {
+            mutableStateOf("")
+        }
 
-            OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
-                label =
-                {
-                    Text("Label")
-                }
-            )
-
-            IconButton(
-                onClick =
-                {
-
-                }
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             )
             {
-                Icon(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = null)
-            }
-        }
 
+                OutlinedTextField(
+                    modifier = Modifier.weight(0.8f),
+                    value = text,
+                    onValueChange = { text = it },
+                    label =
+                    {
+                        Text("Label")
+                    }
+                )
+
+                NavigationArgsSample(text)
+
+            }
+
+        }
     }
 }
+
